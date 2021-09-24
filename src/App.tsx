@@ -103,32 +103,36 @@ const App = () => {
 
   return (
     <Container fluid="sm">
-      <AppContext.Provider
-        value={{
-          handleDelete,
-          openEditForm,
-          setShow,
-          show,
-          setFormState,
-          formState,
-          handleSubmit,
-          handleInputChange,
-          input,
-          dispatch,
-        }}>
-        <Row sm="auto">
-          <Col>
-            <PostHead />
-            {typeof posts !== 'undefined' &&
-              loaded &&
-              posts
-                .map((post: Posts, index: number) => {
-                  return <Post post={post} index={index} key={post.id} />;
-                })
-                .reverse()}
-          </Col>
-        </Row>
-      </AppContext.Provider>
+      {loaded ? (
+        <AppContext.Provider
+          value={{
+            handleDelete,
+            openEditForm,
+            setShow,
+            show,
+            setFormState,
+            formState,
+            handleSubmit,
+            handleInputChange,
+            input,
+            dispatch,
+          }}>
+          <Row sm="auto">
+            <Col>
+              <PostHead />
+              {typeof posts !== 'undefined' &&
+                loaded &&
+                posts
+                  .map((post: Posts, index: number) => {
+                    return <Post post={post} index={index} key={post.id} />;
+                  })
+                  .reverse()}
+            </Col>
+          </Row>
+        </AppContext.Provider>
+      ) : (
+        <div className="loader"></div>
+      )}
     </Container>
   );
 };
