@@ -2,10 +2,17 @@ body {
   background-color: rgb(236, 236, 236);
 }
 
+.container-sm {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  max-width: 780px;
+}
+
 .write-btn {
   background-color: #fff;
   display: flex;
-  justify-content: start;
+  flex: start;
   align-items: center;
   height: 50px;
   width: 100%;

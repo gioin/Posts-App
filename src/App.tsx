@@ -7,12 +7,7 @@ import PostHead from './components/PostHead';
 import { AppContext } from './helper/Context';
 import { reducer, inputReducer } from './reducer';
 import { Posts } from './types';
-import { sendHttpRequest } from './fetch';
-
-export const endpointLimit =
-  'https://jsonplaceholder.typicode.com/posts?_page=0&_limit=5';
-
-export const fullEndpoint = 'https://jsonplaceholder.typicode.com/posts';
+import { sendHttpRequest, endpoint, endpointLimit } from './fetch';
 
 const App = () => {
   const [posts, dispatch] = useReducer(reducer, []);
@@ -32,7 +27,7 @@ const App = () => {
 
   // ----------Delete Post----------
   const handleDelete = (post: Posts) => {
-    sendHttpRequest('DELETE', `${fullEndpoint}/${post.id}`).then(data => {
+    sendHttpRequest('DELETE', `${endpoint}/${post.id}`).then(data => {
       dispatch({ type: 'delete', id: post.id });
     });
   };
@@ -49,7 +44,7 @@ const App = () => {
 
     // if adding
     if (formState === 'add') {
-      sendHttpRequest('POST', fullEndpoint, newData).then(data => {
+      sendHttpRequest('POST', endpoint, newData).then(data => {
         dispatch({
           type: 'submit',
           newdata: data,
@@ -63,7 +58,7 @@ const App = () => {
 
       // if editing
     } else if (formState === 'edit') {
-      sendHttpRequest('PUT', `${fullEndpoint}/${currentPost!.id}`, newData)
+      sendHttpRequest('PUT', `${endpoint}/${currentPost!.id}`, newData)
         .then(data => {
           dispatch({
             type: 'edit',
@@ -107,14 +102,7 @@ const App = () => {
   };
 
   return (
-    <Container
-      fluid="sm"
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        marginTop: '20px',
-        maxWidth: '846px',
-      }}>
+    <Container fluid="sm">
       <AppContext.Provider
         value={{
           handleDelete,

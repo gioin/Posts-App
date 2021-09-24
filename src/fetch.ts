@@ -1,3 +1,7 @@
+export const endpoint = 'https://jsonplaceholder.typicode.com/posts';
+export const endpointLimit =
+  'https://jsonplaceholder.typicode.com/posts?_page=0&_limit=5';
+
 export const sendHttpRequest = (method: string, url: string, data?: object) => {
   return fetch(url, {
     method: method,
